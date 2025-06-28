@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Zadania 1</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="style.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="pierwsze-uruchomienie">Pierwsze uruchomienie</h1>
+<p>Kolejne zadania będą dostarczane jako projekty w visual studio, które powinny być otwierane w ramach jednego solution. Żeby uruchomić zadania należy pobrać i rozpakować solution znajdujące się pod adresem TODO. Zawiera ono wszelkie potrzebne zależności. Następnie należy pobrać projekt określonego zadania (w tym wypadku zadania 1 znajdujące się TODO) i wkleić zawartość do folderu z Solution.</p>
+<p>Struktura powinna wyglądać nastęująco: <img src="./img/struktura.jpg" /> Otwórz plik <code>grk-cw.sln</code> w visual studio, ustaw projekt z ćwiczeniami jaki projekt startowy. Poszczególne zadania są dostarczane jako osobne pliki z rozszerzeniem hpp, żeby uruchomić zadanie zmień ostatni include.</p>
+<h1 id="opis-projektu">Opis projektu</h1>
+<p>W zadaniach korzystamy z kilku bibliotek, mianowicie: * <strong>GLEW</strong> OpenGL Extension Wrangler Library - biblioteka odpowiedzialna za ładowanie opengla, umożliwia zdeterminowanie jakie wersje opengla są obsługiwane na maszynie i jakie rozszerzenia są dostęne. * <strong>GLFW</strong> Graphics Library Framework - biblioteka umożliwiająca tworzenie okien i obsługę wejścia użytkownika. Pozwala na stworzenie więcej niż jednego okna i posiada obsługę nie tylko klawiatury i myszy, ale również padów i joysticków. * <strong>GLM</strong> OpenGL Mathematics - biblioteka matematyczna.</p>
+<h2 id="omówienie-pliku-main.cpp">Omówienie pliku main.cpp</h2>
+<p>Zaczniemy od funkcji main.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;glew.h&quot;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;GLFW/glfw3.h&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;glm.hpp&quot;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;Shader_Loader.h&quot;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;Render_Utils.h&quot;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;ex_1_1.hpp&quot;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span> ** argv)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">// inicjalizacja glfw</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    glfwInit();</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, <span class="dv">3</span>);</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, <span class="dv">3</span>);</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifdef __APPLE__</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="co">// tworzenie okna za pomocą glfw</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    GLFWwindow* window = glfwCreateWindow(<span class="dv">500</span>, <span class="dv">500</span>, <span class="st">&quot;FirstWindow&quot;</span>, NULL, NULL);</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (window == NULL)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot;Failed to create GLFW window&quot;</span> &lt;&lt; <span class="bu">std::</span>endl;</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>        glfwTerminate();</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> -<span class="dv">1</span>;</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    glfwMakeContextCurrent(window);</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ladowanie OpenGL za pomoca glew</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    glewInit();</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    glViewport(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">500</span>, <span class="dv">500</span>);</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    init(window);</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    <span class="co">// uruchomienie glownej petli</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    renderLoop(window);</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    shutdown(window);</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    glfwTerminate();</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span>;</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>W pierwszych trzech instrukcjach inicjalizujemy glfw za pomocą <code>glfwInit()</code>. Za pomocą <code>glfwWindowHint</code> ustawiamy wersję opengla na 3.3. Ta funkcja pozwala na ustawienie różnych opcji pełną listę można zobaczy <a href="https://www.glfw.org/docs/3.3/window_guide.html#window_hints">tu</a>. Należy je wykonać przed utworzeniem okna.</p>
+<p>Okno tworzymy funkcją <code>glfwCreateWindow</code>, jako argumenty przekazujemy rozmiar okna i jego tytuł. Czwarty argument służy do ustawienia, na którym monitorze ma się okno pokazać, jeżeli będzie uruchomione w pełnym ekranie. Natomiast ostatni do przekazania kontekstu okna, jeżeli ma je współdzielić z innym. Nie będziemy korzystać z tych opcji, więc ustawiamy je na null. Funkcja zwraca wskaźnik na okno, który będzie nam potrzebny, żeby cokolwiek z nim zrobić. Ustawiamy okno na <code>current</code> za pomocą funkcji <code>glfwMakeContextCurrent</code>. W ten sposób przypisujemy okno do danego wątku.</p>
+<p><code>glewInit</code> inicjalizuje opengla a <code>glViewport</code> przekazuje jaki jest rozmiar okna do opengla.</p>
+<p>Następne 3 funkcje <code>init</code>, <code>renderLoop</code> i <code>shutdown</code> są naszymi funkcjami, które znajdują się w plikach z zadaniami (nazwa plik <code>ex_X_Y.hpp</code> to <strong>X</strong> to numer ćwiczeń a <strong>Y</strong> to numer zadania).</p>
+<h1 id="omówienie-ex_1_1.hpp">Omówienie ex_1_1.hpp</h1>
+<p>Funkcje <code>init</code> i <code>shutdown</code> będziemy umieszczać instrukcje, które mają być wykonane raz przy odpowiednio uruchomieniu i wyłączeniu aplikacji.</p>
+<p>W funkcji <code>init</code> znajduje się jedna instrukcja, która ustawia, że <code>framebuffer_size_callback</code> zostanie wywołana przy zmianie rozmiaru okna. Ta z kolei informuje opengla o zmianie rozmiaru ekranu za pomocą <code>glViewport</code></p>
+<p>Natomiast <code>renderLoop</code> jest funkcją, która ma zawierać główną pętlę i wygląda następująco</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> renderLoop(GLFWwindow* window) {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> (!glfwWindowShouldClose(window))</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        processInput(window);</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        renderScene(window);</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        glfwPollEvents();</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>pobiera ona okno i wykonuje na nim instrukcje w pętli, dopóki nie dostanie informacji, że ma być ono zamknięte. W tej chwili w pętli znajdują się dwie instrukcje odpowiedzialne za przetworzenie wejścia (czyli obsługę klawiatury i myszy) oraz odświeżenie sceny oraz <code>glfwPollEvents()</code>, która sprawdza czy są jakieś zadania do wykonania (na przykład sprawdza, czy rozmiar okna został zmieniony).</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> processInput(GLFWwindow* window)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        glfwSetWindowShouldClose(window, <span class="kw">true</span>);</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>W <code>processInput</code> sprawdzamy tylko czy wciśnięto Esc, jeżeli tak, to ustawiamy, że aplikacja powinna być zamknięta</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> renderScene(GLFWwindow* window)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ZADANIE: Przesledz kod i komentarze</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ZADANIE: Zmien kolor tla sceny, przyjmujac zmiennoprzecinkowy standard RGBA</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    glClearColor(<span class="fl">0.0</span><span class="bu">f</span>, <span class="fl">0.3</span><span class="bu">f</span>, <span class="fl">0.3</span><span class="bu">f</span>, <span class="fl">1.0</span><span class="bu">f</span>);</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Powinno byc wywolane po kazdej klatce</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    glfwSwapBuffers(window);</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Natomiast w render scene ustawiamy kolor za pomocą funkcji <code>glClearColor</code> i czyścimy bufory za pomocą <code>glClear</code>, <em>openGL</em> korzysta z informacji, która przekazaliśmy w <code>glClearColor</code>, żeby określić jakiego koloru ma być tło. By uniknąć migotania glfw wykorzystuje <strong>double buffering</strong> to znaczy przechowuje dwa bufory, jeden jest wyświetlany a na drugim dokonuje się operacji (określa się je <em>front</em> i <em>back</em>). Po zakończeniu rysowania zamienia się je miejscami (<em>swap</em>). Robimy to za pomocą funkcji <code>glfwSwapBuffers</code>.</p>
+<h3 id="zadanie">Zadanie</h3>
+<p>Zmień kolor tła na dowolny inny.</p>
+<h3 id="zadanie-1">Zadanie*</h3>
+<p>Zmodyfikuj funkcję render scene tak, żeby kolor się zmieniał co klatkę. Możesz do tego skorzystać ze zmiennej globalnej lub czas działania, który możesz uzyskać funkcją <code>glfwGetTime()</code>.</p>
+<h1 id="zadanie-1_2">Zadanie 1_2</h1>
+<p>Celem tego zadania będzie narysowanie trójkąta, zanim do tego przejdziemy zamień linię <code>#include "ex_1_1.hpp"</code> na <code>#include "ex_1_2.hpp"</code>. Przejdź do pliku <code>ex_1_2.hpp</code></p>
+<p>Opengl operuje w kostce od [-1,1]x[-1,1]x[-1,1], którą następnie patrzy wzdłóż osi Z. nazywamy tą przestrzeń <em>clip space</em> (więcej o tym na wykładzie). Pozostałe osie rozciąga na ekranie. Dodatkowo poza współrzędnymi X, Y, Z potrzebna jest wspórzędna W, która musi być równa 1. Znaczy to, że każdy punkt w trójkącie musi mieć cztery współrzędne, dwie pierwsze z nich zakresu od -1 do 1, trzecia równa 0 a ostatnie zawsze równa 1. Kolejność punktów również jest istotna, dzięki niej opengl określa orientację ścian. Domyślnie punkty powinny być zorientowane w kierunku przeciwnym do ruchu wskazówek zegra.</p>
+<h3 id="zadanie-2">Zadanie</h3>
+<p>Wymyśl 3 punkty dla trójkąta i umieść je w płaskiej tablicy 12 floatów wewnątrz funkcji <code>init</code>. Stworzoną tablicę należy załadować do pamięci karty graficznej przy inicjalizacji. Wykorzystaj do tego funkcję pomocniczą <code>Core::initVAO</code>, jako pierwszy argument podaj tablicę, jako drugi liczbę wierzchołków a jako trzeci liczbę punktów w wierzchołku. Funkcja zwraca zmienną typu <code>GLuint</code>, która jest identyfikatorem VAO w pamięci karty, przypisz go do zmiennej globalnej triangleVAO.</p>
+<blockquote>
+<p>W tym zadaniu w funkcji init dochodzi kopilacja shaderów i połączeinu ich w <em>shader program</em>. Jest to program, który posłuży nam do wyświetlenia trójkątów, (więcej o shaderach będzie na późniejszych zajęciach).</p>
+</blockquote>
+<p>W <code>renderScene</code> wykorzystaj funkcję <code>Core::drawVAO</code> do narysowania trójkąta.</p>
+<h1 id="zadanie-1_3">Zadanie 1_3</h1>
+<p>Celem tego zadania będzie narysowanie czworokąta. Możemy to zrobić poprzez narysowanie dwóch trójkątów, ale jest nieefektywne, ponieważ powielimy dwa pounkty podwójnie (teraz nie jest to taka duża różnica, ale przy większej liczbie trójkątów jest bardziej istotne). Zamiast tego skorzystamy z indeksowania, czyli oprócz tablicy wierzchołków prześlemy też tablicę indeksów, które będą określać jakie punkty należy wykorzystać do rysowania wierzchołków.</p>
+<h3 id="zadanie-3">Zadanie</h3>
+<p>Tym razem wymyśl 4 punkty i umieść je w analogicznej tablic 16 floatów. Oprócz tego stwórz tablicę typu <code>unsigned int</code> i umieść w niej indeksy dla wóch trójkątów, które będą tworzych nasz czworokąt. Przekarz obie tablice do GPU za pomocą funcji <code>Core::initVAOIndexed</code>. Następnie w funcji <code>renderScene</code> użyj funkcji <code>Core::drawVAOIndexed</code> analogicznie jak <code>Core::drawVAO</code> w poprzednim zadaniu.</p>
+<h1 id="zadanie-1_4-1_5-1_6">Zadanie 1_4, 1_5, 1_6</h1>
+<p>Zadania wymagają zdefiniowania odpowiednich macierzy o tym jakiej powinny być postaci można przeczytać <a href="https://pl.wikipedia.org/wiki/Elementarne_macierze_transformacji">tu</a>.</p>
+<p>Uważaj, konstrukor <code>mat4</code> czyta tablicę <code>float</code> kolumnami, czyli będzie ona transponowana w stosunku do tego co jest na ekranie.</p>
+</body>
+</html>

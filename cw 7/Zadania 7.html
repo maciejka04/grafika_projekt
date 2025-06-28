@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Lab: Asteroida PBR z Magma i Statkiem Kosmicznym</title>
+  <style>
+    body { font-family: sans-serif; line-height: 1.6; padding: 20px; max-width: 900px; margin: auto; }
+    h1, h2 { border-bottom: 1px solid #ccc; padding-bottom: 5px; color: #333; }
+    code { background-color: #f4f4f4; padding: 2px 6px; border-radius: 4px; white-space: pre-wrap; font-family: monospace; color: #c7254e;}
+    pre code { display: block; padding: 10px; background-color: #eee; border: 1px solid #ddd; border-radius: 5px; white-space: pre; overflow-x: auto; color: #333; }
+    .task { border-left: 5px solid #007bff; padding-left: 15px; margin-bottom: 15px; background-color: #f8f9fa; padding-top: 10px; padding-bottom: 5px; border-radius: 0 5px 5px 0;}
+    .file { font-weight: bold; color: #dc3545; }
+    .function { font-weight: bold; color: #28a745;}
+    .variable { font-weight: bold; color: #17a2b8;}
+    .comment-hint { color: #6c757d; font-style: italic; }
+    img { max-width: 100%; border: 1px solid #ccc; margin: 10px 0; }
+  </style>
+</head>
+<body>
+
+<h1>Lab: Asteroida PBR z Magma i Statkiem Kosmicznym</h1>
+<p>W tym laboratorium zbudujesz realistyczną scenę w przestrzeni kosmicznej zawierającą asteroidę z efektem magmy oraz statek kosmiczny otoczony skyboxem. Nauczysz się używać shaderów PBR, tekstur mapujących materiały oraz sterowania parametrami przez GUI.</p>
+<p>Zmiany wprowadzaj w pliku <span class="file">ex_7_1.hpp</span> oraz w shaderach w katalogu <span class="file">shaders/</span>.</p>
+
+<hr>
+
+<h2 id="etap1">Etap 1: Wczytanie modeli i podstawowe tekstury</h2>
+<img src="./img/Stage1.jpg" alt="Etap 1 - wczytanie modeli" style="width:40%;" />
+<p class="task">
+<strong>Zadanie:</strong>
+<ol>
+  <li>W funkcji <code class="function">init</code> załaduj model asteroidy (<span class="file">Rock001.obj</span>) i model statku (<span class="file">spaceship2.obj</span>) przy pomocy funkcji <code class="function">loadModelToContext</code>.</li>
+  <li>Przypisz modele do kontekstów <code class="variable">sphereContext</code> (asteroida) i <code class="variable">shipContext</code> (statek).</li>
+  <li>Załaduj tekstury albedo (<span class="file">RockTexture001_diffuse.png</span>, <span class="file">albedo.png</span>) oraz normal mapy.</li>
+  <li>Użyj funkcji <code class="function">drawObjectTexture</code> do rysowania asteroidy i <code class="function">drawObjectShip</code> do rysowania statku.</li>
+</ol>
+</p>
+<img src="./img/Stage2.jpg" alt="Etap 2 - dodanie skyboxa" style="width:40%;" />
+<hr>
+
+<h2 id="etap2">Etap 2: Dodanie skyboxa</h2>
+
+<p class="task">
+<strong>Zadanie:</strong>
+<ol>
+  <li>Załaduj tekstury skyboxa z folderu <span class="file">textures/skybox/</span>: <code>_px.jpg</code>, <code>_nx.jpg</code>, <code>_py.jpg</code>, <code>_ny.jpg</code>, <code>_pz.jpg</code>, <code>_nz.jpg</code>.</li>
+  <li>Dodaj poniższy kod w funkcji <code class="function">init</code> do zainicjalizowania VAO i VBO skyboxa:</li>
+</ol>
+<div class="code-to-add"><pre><code>const char* faces[6] = {
+  "textures/skybox/_px.jpg",
+  "textures/skybox/_nx.jpg",
+  "textures/skybox/_py.jpg",
+  "textures/skybox/_ny.jpg",
+  "textures/skybox/_pz.jpg",
+  "textures/skybox/_nz.jpg"
+};
+
+glGenVertexArrays(1, &skyboxVAO);
+glGenBuffers(1, &skyboxVBO);
+
+glBindVertexArray(skyboxVAO);
+glBindBuffer(GL_ARRAY_BUFFER, skyboxVBO);
+glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), skyboxVertices, GL_STATIC_DRAW);
+
+glEnableVertexAttribArray(0);
+glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+
+glBindVertexArray(0);
+
+skyboxCubemap = Core::LoadCubemap(faces);</code></pre></div>
+
+<p>Napisz własny shader skyboxa: <strong>vertex shader</strong> oraz <strong>fragment shader</strong> zapisując je np. w plikach <span class="file">skybox.vert</span> i <span class="file">skybox.frag</span>. Użyj poniższego kodu jako punktu wyjścia:</p>
+
+<div class="code-to-add"><pre><code>// skybox.vert
+#version 430 core
+layout (location = 0) in vec3 aPos;
+out vec3 TexCoords;
+uniform mat4 view;
+uniform mat4 projection;
+void main() {
+    TexCoords = aPos;
+    vec4 pos = projection * view * vec4(aPos, 1.0);
+    gl_Position = pos.xyww;
+}
+</code></pre></div>
+
+<div class="code-to-add"><pre><code>// skybox.frag
+#version 430 core
+in vec3 TexCoords;
+out vec4 FragColor;
+uniform samplerCube skybox;
+void main() {
+    FragColor = texture(skybox, TexCoords);
+}
+</code></pre></div>
+
+<p>Załaduj shadery do OpenGL za pomocą <code class="function">shaderLoader.CreateProgram("shaders/skybox.vert", "shaders/skybox.frag")</code> i przypisz do zmiennej <code class="variable">programSkybox</code> w funkcji <code class="function">init</code>.</p>
+
+<p>Następnie dodaj renderowanie skyboxa na początku funkcji <code class="function">renderScene</code>:</p>
+
+<div class="code-to-add"><pre><code>glDepthFunc(GL_LEQUAL);
+glUseProgram(programSkybox);
+
+glm::mat4 view = glm::mat4(glm::mat3(createCameraMatrix()));
+glm::mat4 projection = createPerspectiveMatrix();
+
+glUniformMatrix4fv(glGetUniformLocation(programSkybox, "view"), 1, GL_FALSE, &view[0][0]);
+glUniformMatrix4fv(glGetUniformLocation(programSkybox, "projection"), 1, GL_FALSE, &projection[0][0]);
+
+glBindVertexArray(skyboxVAO);
+glBindTexture(GL_TEXTURE_CUBE_MAP, skyboxCubemap);
+glDrawArrays(GL_TRIANGLES, 0, 36);
+glBindVertexArray(0);
+
+glUseProgram(0);
+glDepthFunc(GL_LESS);
+</code></pre></div>
+
+<p>
+<strong>Wyjaśnienie:</strong> Skybox jest renderowany w specjalny sposób – używamy tylko macierzy rotacji z kamery (bez translacji), aby wyglądało, że jesteśmy w centrum sześciennego środowiska. W vertex shaderze zwracamy <code>gl_Position = pos.xyww;</code> aby przesunąć punkt z głębią 1.0, co zapewnia, że skybox jest zawsze na tle sceny. W fragment shaderze próbkujemy teksturę cubemap używając współrzędnych teksturowania odpowiadających wektorowi kierunku.
+</p>
+
+<p>
+Dzięki tej technice skybox będzie zawsze wyglądał, jakby otaczał kamerę, bez względu na jej pozycję. Upewnij się, że <code>glDepthFunc(GL_LEQUAL)</code> jest ustawione przed rysowaniem skyboxa, aby nie zakrywał obiektów w scenie.
+</p>
+<img src="./img/Stage3.jpg" alt="Etap 3 - efekt magmy" style="width:40%;" />
+<hr>
+
+
+<h2 id="etap3">Etap 3: Efekt magmy na asteroidzie</h2>
+
+<p class="task">
+<strong>Zadanie:</strong>
+<ol>
+  <li>W pliku <code class="file">shader_5_1_tex.frag</code> zaimplementuj efekt magmy poprzez mieszanie koloru powierzchni z kolorem magmy na podstawie wartosci <code class="variable">heightMap</code>.</li>
+  <li>Uzyj funkcji <code class="function">smoothstep</code> i <code class="function">mix</code>, aby uzyskac efekt zarzenia tylko w zaglebieniach asteroidy.</li>
+  <li>Dodaj suwak <code class="variable">glowThreshold</code> w GUI i przesylaj wartosc jako uniform do shaderu.</li>
+</ol>
+<p>Fragment kodu do analizy:</p>
+<div class="code-to-add"><pre><code>float magmaWeight = smoothstep(glowThreshold, 0.0, height);
+vec3 magmaColor = mix(vec3(1.0, 0.5, 0.0), vec3(1.0, 0.9, 0.8), pow(magmaWeight, 1.5));
+magmaColor = mix(vec3(0.5, 0.0, 0.0), magmaColor, magmaWeight);</code></pre></div>
+<p><strong>Zadanie dodatkowe:</strong> Pobaw sie suwakiem glowThreshold i zaobserwuj zmiany efektu. Co by sie stalo, gdybys mieszal magmaColor nie z ostatecznym textureColor po oswietleniu, ale tylko z albedo przed oswietleniem? Przetestuj obie wersje.</p>
+<img src="./img/Stage4.jpg" alt="Etap 4 - rendering PBR" style="width:40%;" />
+<hr>
+
+<h2 id="etap4">Etap 4: PBR - rendering fizycznie poprawny</h2>
+
+<p class="task">
+<strong>Zadanie:</strong>
+<ol>
+  <li>Zaimplementuj w shaderze <code class="file">shader_5_1_tex.frag</code> model oświetlenia PBR: Cook-Torrance.</li>
+  <li>Uzyj tekstur <code class="variable">metallicMap</code>, <code class="variable">roughnessMap</code>, <code class="variable">normalMap</code>, <code class="variable">heightMap</code>.</li>
+  <li>Zaimportuj funkcje rozkladu normalnego, funkcje Geometrii (Schlick-GGX) i przyblizenie Fresnela (Fresnel-Schlick).</li>
+  <li>Przesylaj parametry <code class="variable">roughness</code> i <code class="variable">metallic</code> jako uniformy.</li>
+</ol>
+<p>Aby lepiej zrozumiec teorie PBR, przeczytaj rozdzial <a href="https://learnopengl.com/PBR/Theory" target="_blank">PBR Theory</a> na stronie LearnOpenGL.</p>
+<p>PBR (Physical Based Rendering) to technika, ktora pozwala na znacznie bardziej realistyczne odwzorowanie materialow dzieki odwzorowaniu fizycznych wlasciwosci powierzchni. W PBR stosujemy tekstury: albedo, metalness, roughness, normal, ambient occlusion i height. Kluczowe cechy PBR to:</p>
+<ul>
+  <li>Model mikrofasetowy powierzchni (kazda powierzchnia sklada sie z mikro-lusterek)</li>
+  <li>Zachowanie zasady zachowania energii (ilosc odbitego swiatla nie moze byc wieksza niz padajacego)</li>
+  <li>Uzycie fizycznie poprawnych funkcji BRDF (jak Cook-Torrance)</li>
+</ul>
+<p>Dzieki tym zalozeniom materialy w scenie beda wygladac dobrze niezaleznie od warunkow oswietleniowych. Wiekszosc silnikow gier (jak Unreal Engine) stosuje ten model. Zastosowanie PBR wymaga uzycia tekstur z parametrami fizycznymi oraz odpowiednich funkcji w shaderze fragmentow.</p>
+
+<hr>
+
+<h2 id="etap5">Etap 5: Efekt końcowy</h2>
+
+<p class="task">
+<strong>Zadanie:</strong>
+<ol>
+  <li>Upewnij się, że asteroida renderuje się z efektem magmy i poprawnym PBR.</li>
+  <li>Statek powinien używać osobnego shadera z teksturami PBR oraz mapami emisji (<code class="file">emit.png</code> i <code class="file">emit_intensity.png</code>).</li>
+  <li>Skybox otacza całą scenę i poprawnie reaguje na ruch kamery.</li>
+  <li>GUI pozwala na zmianę parametrów: <code class="variable">roughness</code>, <code class="variable">metallic</code>, <code class="variable">glowThreshold</code>, <code class="variable">roughnessShip</code> i <code class="variable">metallicShip</code>.</li>
+</ol>
+</p>
+
+<p>Dla efektu świecenia silników statku, użyj map emisji i wyrenderuj je w shaderze **bez dodatkowego modelu oświetlenia** – sam kolor emisji doda efekt świecących elementów (turkusowe podświetlenie silników). Możesz użyć osobnego kanału tekstury (np. <code class="file">emit_intensity.png</code>) aby kontrolować intensywność efektu.</p>
+
+<p class="task"><strong>Zadanie dodatkowe:</strong></p>
+<p>Dodaj warunek w shaderze lub w aplikacji, aby silnik statku świecił **tylko podczas ruchu** (np. jeśli użytkownik naciska <code>W</code>, <code>A</code>, <code>S</code>, <code>D</code>). W przeciwnym razie emisja powinna być wyłączona (np. ustaw uniform <code>emissionIntensity = 0.0</code> gdy nie porusza się).</p>
+
+<img src="./img/Stage5.jpg" alt="Etap 5 - efekt końcowy" style="width:40%;" />
+
+<p>Scena powinna wyglądać jak realistyczna symulacja przestrzeni kosmicznej z pełną kontrolą materiałów oraz efektami specjalnymi poprzez GUI.</p>
+
+
+</body>
+</html>
