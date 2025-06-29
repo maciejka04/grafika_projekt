@@ -178,6 +178,26 @@ void drawObjectTexture(Core::RenderContext& context, glm::mat4 modelMatrix, GLui
 	glUseProgram(0);
 }
 
+void drawSkybox() {
+	glDepthFunc(GL_LEQUAL);
+	glUseProgram(programSun);
+
+	glm::mat4 view = glm::mat4(glm::mat3(createCameraMatrix()));
+	glm::mat4 projection = createPerspectiveMatrix();
+
+	glUniformMatrix4fv(glGetUniformLocation(programSun, "view"), 1, GL_FALSE, glm::value_ptr(view));
+	glUniformMatrix4fv(glGetUniformLocation(programSun, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+
+	glBindVertexArray(skyboxVAO);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, skyboxCubemap);
+	glDrawArrays(GL_TRIANGLES, 0, 36);
+	glBindVertexArray(0);
+
+	glDepthFunc(GL_LESS);
+}
+
+
 
 void renderScene(GLFWwindow* window)
 {
@@ -185,6 +205,8 @@ void renderScene(GLFWwindow* window)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glm::mat4 transformation;
 	float time = glfwGetTime();
+
+	drawSkybox();
 
 	glm::mat4 europeModel =
 		glm::translate(europeStartPos) *
@@ -271,6 +293,32 @@ void init(GLFWwindow* window)
 	texture::europe = Core::LoadTexture("textures/europe.png");
 	texture::europeNormal = Core::LoadTexture("textures/europeNormal.png");
 
+	const char* faces[6] = {
+	"textures/skybox/_px.jpg",
+	"textures/skybox/_nx.jpg",
+	"textures/skybox/_py.jpg",
+	"textures/skybox/_ny.jpg",
+	"textures/skybox/_pz.jpg",
+	"textures/skybox/_nz.jpg"
+	};
+
+	glGenVertexArrays(1, &skyboxVAO);
+	glGenBuffers(1, &skyboxVBO);
+
+	glBindVertexArray(skyboxVAO);
+	glBindBuffer(GL_ARRAY_BUFFER, skyboxVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), skyboxVertices, GL_STATIC_DRAW);
+
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glBindVertexArray(0);
+
+	skyboxCubemap = Core::LoadCubemap(faces);
+
+	programSun = shaderLoader.CreateProgram("shaders/skybox.vert", "shaders/skybox.frag");
+
+
+
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	glfwSetCursorPosCallback(window, mouse_callback);
 
@@ -331,6 +379,8 @@ void renderLoop(GLFWwindow* window) {
 		glfwPollEvents();
 	}
 }
+
+
 
 
 
