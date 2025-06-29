@@ -1,0 +1,16 @@
+H:\grk_proj_git\gp_2\grafika_projekt\dependencies\imgui\backends\imgui_impl_glfw.cpp;H:\grk_proj_git\gp_2\grafika_projekt\cw 7\Debug\imgui_impl_glfw.obj
+H:\grk_proj_git\gp_2\grafika_projekt\dependencies\imgui\backends\imgui_impl_opengl3.cpp;H:\grk_proj_git\gp_2\grafika_projekt\cw 7\Debug\imgui_impl_opengl3.obj
+H:\grk_proj_git\gp_2\grafika_projekt\dependencies\imgui\imgui.cpp;H:\grk_proj_git\gp_2\grafika_projekt\cw 7\Debug\imgui.obj
+H:\grk_proj_git\gp_2\grafika_projekt\dependencies\imgui\imgui_draw.cpp;H:\grk_proj_git\gp_2\grafika_projekt\cw 7\Debug\imgui_draw.obj
+H:\grk_proj_git\gp_2\grafika_projekt\dependencies\imgui\imgui_tables.cpp;H:\grk_proj_git\gp_2\grafika_projekt\cw 7\Debug\imgui_tables.obj
+H:\grk_proj_git\gp_2\grafika_projekt\dependencies\imgui\imgui_widgets.cpp;H:\grk_proj_git\gp_2\grafika_projekt\cw 7\Debug\imgui_widgets.obj
+H:\grk_proj_git\gp_2\grafika_projekt\cw 7\src\Box.cpp;H:\grk_proj_git\gp_2\grafika_projekt\cw 7\Debug\Box.obj
+H:\grk_proj_git\gp_2\grafika_projekt\cw 7\src\Camera.cpp;H:\grk_proj_git\gp_2\grafika_projekt\cw 7\Debug\Camera.obj
+H:\grk_proj_git\gp_2\grafika_projekt\cw 7\src\main.cpp;H:\grk_proj_git\gp_2\grafika_projekt\cw 7\Debug\main.obj
+H:\grk_proj_git\gp_2\grafika_projekt\cw 7\src\Render_Utils.cpp;H:\grk_proj_git\gp_2\grafika_projekt\cw 7\Debug\Render_Utils.obj
+H:\grk_proj_git\gp_2\grafika_projekt\cw 7\src\Shader_Loader.cpp;H:\grk_proj_git\gp_2\grafika_projekt\cw 7\Debug\Shader_Loader.obj
+H:\grk_proj_git\gp_2\grafika_projekt\cw 7\src\SOIL\image_DXT.c;H:\grk_proj_git\gp_2\grafika_projekt\cw 7\Debug\image_DXT.obj
+H:\grk_proj_git\gp_2\grafika_projekt\cw 7\src\SOIL\image_helper.c;H:\grk_proj_git\gp_2\grafika_projekt\cw 7\Debug\image_helper.obj
+H:\grk_proj_git\gp_2\grafika_projekt\cw 7\src\SOIL\SOIL.c;H:\grk_proj_git\gp_2\grafika_projekt\cw 7\Debug\SOIL.obj
+H:\grk_proj_git\gp_2\grafika_projekt\cw 7\src\SOIL\stb_image_aug.c;H:\grk_proj_git\gp_2\grafika_projekt\cw 7\Debug\stb_image_aug.obj
+H:\grk_proj_git\gp_2\grafika_projekt\cw 7\src\Texture.cpp;H:\grk_proj_git\gp_2\grafika_projekt\cw 7\Debug\Texture.obj
