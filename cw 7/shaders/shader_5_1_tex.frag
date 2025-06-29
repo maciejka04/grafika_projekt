@@ -12,7 +12,7 @@ in mat3 TBN;
 
 out vec4 outColor;
 
-float AMBIENT = 0.4;
+float AMBIENT = 0.6;
 float shininess = 32.0;
 
 void main()
@@ -26,16 +26,17 @@ void main()
     vec3 reflectDir = reflect(-lightDir, normal);
 
     vec3 textureColor = texture(colorTexture, texCoord).rgb;
+
     float diff = max(dot(normal, lightDir), 0.0);
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), shininess);
 
     vec3 ambient = AMBIENT * textureColor;
-    vec3 diffuse = diff * textureColor;
-    vec3 specular = spec * vec3(1.0);
+    vec3 diffuse = diff * textureColor;          // << s³absze diffuse
+    vec3 specular = spec * textureColor * 0.7;         // << s³abszy, niebia³y specular
 
     vec3 color = ambient + diffuse + specular;
 
-    color = pow(color, vec3(1.0 / 2.2));
+    color = pow(color, vec3(1.0 / 2.2)); // gamma correction
 
     outColor = vec4(color, 1.0);
 }

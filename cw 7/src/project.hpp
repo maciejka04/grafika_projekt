@@ -77,7 +77,7 @@ namespace texture {
 	GLuint earthAO;
 	GLuint earthHeight;
 
-	
+
 }
 
 GLuint skyboxCubemap;
@@ -94,11 +94,10 @@ Core::Shader_Loader shaderLoader;
 Core::RenderContext sphereContext;
 Core::RenderContext europeContext;
 
-glm::vec3 cameraPos = glm::vec3(0.f, 5.0f, 0);
-glm::vec3 cameraDir = glm::vec3(1.f, 0.f, 0.f);
 
-glm::vec3 spaceshipPos = glm::vec3(0.f, 5.0f, 0);
-glm::vec3 spaceshipDir = glm::vec3(0.f, -1.0f, 0.f);
+glm::vec3 cameraPos = glm::vec3(0.f, 1.f, 5.f);
+glm::vec3 cameraFront = glm::vec3(0.f, 0.f, -1.f);
+glm::vec3 cameraUp = glm::vec3(0.f, 1.f, 0.f);
 
 glm::vec3 europeStartPos = glm::vec3(0.0f, 0.0f, 0.0f);
 GLuint VAO, VBO;
@@ -113,23 +112,17 @@ float metallic = 0.0f;
 float metallicShip = 0.0f;
 float glowThreshold = 0.3f;
 
+float yaw = -90.0f;
+float pitch = 0.0f;
+float lastX = 800.0f / 2.0;
+float lastY = 600.0f / 2.0;
+bool firstMouse = true;
+
 
 
 glm::mat4 createCameraMatrix()
 {
-	glm::vec3 globalUp = glm::vec3(0.f, 0.f, -1.f);
-	glm::vec3 cameraSide = glm::normalize(glm::cross(cameraDir, globalUp));
-	glm::vec3 cameraUp = glm::normalize(glm::cross(cameraSide, cameraDir));
-	glm::mat4 cameraRotrationMatrix = glm::mat4({
-		cameraSide.x,cameraSide.y,cameraSide.z,0,
-		cameraUp.x,cameraUp.y,cameraUp.z ,0,
-		-cameraDir.x,-cameraDir.y,-cameraDir.z,0,
-		0.,0.,0.,1.,
-		});
-	cameraRotrationMatrix = glm::transpose(cameraRotrationMatrix);
-	glm::mat4 cameraMatrix = cameraRotrationMatrix * glm::translate(-cameraPos);
-
-	return cameraMatrix;
+	return glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
 }
 
 glm::mat4 createPerspectiveMatrix()
@@ -171,15 +164,16 @@ void drawObjectTexture(Core::RenderContext& context, glm::mat4 modelMatrix, GLui
 	glm::mat4 transformation = viewProjectionMatrix * modelMatrix;
 	glUniformMatrix4fv(glGetUniformLocation(prog, "transformation"), 1, GL_FALSE, (float*)&transformation);
 	glUniformMatrix4fv(glGetUniformLocation(prog, "modelMatrix"), 1, GL_FALSE, (float*)&modelMatrix);
+	glUniform3f(glGetUniformLocation(prog, "cameraPos"), cameraPos.x, cameraPos.y, cameraPos.z);
 	glUniform3f(glGetUniformLocation(prog, "lightPos"), 0.0f, 5.0f, 0.0f);
 	glUniform3f(glGetUniformLocation(prog, "cameraPos"), cameraPos.x, cameraPos.y, cameraPos.z);
 
 
-	
+
 	Core::SetActiveTexture(textureID, "colorTexture", prog, 0);
 	Core::SetActiveTexture(textureID2, "normalMap", prog, 1);
 
-	
+
 	Core::DrawContext(context);
 	glUseProgram(0);
 }
@@ -193,7 +187,7 @@ void renderScene(GLFWwindow* window)
 	float time = glfwGetTime();
 
 	glm::mat4 europeModel =
-		glm::translate(europeStartPos) *      
+		glm::translate(europeStartPos) *
 		glm::scale(glm::vec3(2.0f) * 1.10f);
 	drawObjectTexture(
 		europeContext,
@@ -203,15 +197,6 @@ void renderScene(GLFWwindow* window)
 		roughness,
 		metallic
 	);
-
-	glm::vec3 spaceshipSide = glm::normalize(glm::cross(spaceshipDir, glm::vec3(0.f, 1.f, 0.f)));
-	glm::vec3 spaceshipUp = glm::normalize(glm::cross(spaceshipSide, spaceshipDir));
-	glm::mat4 specshipCameraRotrationMatrix = glm::mat4({
-		spaceshipSide.x,spaceshipSide.y,spaceshipSide.z,0,
-		spaceshipUp.x,spaceshipUp.y,spaceshipUp.z ,0,
-		-spaceshipDir.x,-spaceshipDir.y,-spaceshipDir.z,0,
-		0.,0.,0.,1.,
-		});
 
 
 
@@ -236,6 +221,41 @@ void loadModelToContext(std::string path, Core::RenderContext& context)
 	context.initFromAssimpMesh(scene->mMeshes[0]);
 }
 
+void mouse_callback(GLFWwindow* window, double xpos, double ypos)
+{
+	float sensitivity = 0.1f;
+	if (firstMouse)
+	{
+		lastX = xpos;
+		lastY = ypos;
+		firstMouse = false;
+	}
+
+	float xoffset = xpos - lastX;
+	float yoffset = lastY - ypos; // odwrotnie, bo góra to mniejsze Y
+
+	lastX = xpos;
+	lastY = ypos;
+
+	xoffset *= sensitivity;
+	yoffset *= sensitivity;
+
+	yaw += xoffset;
+	pitch += yoffset;
+
+	// ograniczenie k¹ta pitch
+	if (pitch > 89.0f)
+		pitch = 89.0f;
+	if (pitch < -89.0f)
+		pitch = -89.0f;
+
+	glm::vec3 front;
+	front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+	front.y = sin(glm::radians(pitch));
+	front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+	cameraFront = glm::normalize(front);
+}
+
 void init(GLFWwindow* window)
 {
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
@@ -245,11 +265,14 @@ void init(GLFWwindow* window)
 	programTex = shaderLoader.CreateProgram("shaders/shader_5_1_tex.vert", "shaders/shader_5_1_tex.frag");
 	loadModelToContext("./models/eurobj.obj", europeContext);
 
-	
 
-	
+
+
 	texture::europe = Core::LoadTexture("textures/europe.png");
 	texture::europeNormal = Core::LoadTexture("textures/europeNormal.png");
+
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwSetCursorPosCallback(window, mouse_callback);
 
 }
 
@@ -264,36 +287,20 @@ void shutdown(GLFWwindow* window)
 //obsluga wejscia
 void processInput(GLFWwindow* window)
 {
-	glm::vec3 spaceshipSide = glm::normalize(glm::cross(spaceshipDir, glm::vec3(0.f, 1.f, 0.f)));
-	glm::vec3 spaceshipUp = glm::vec3(0.f, 1.f, 0.f);
-	float angleSpeed = 0.01f;
-	float moveSpeed = 0.01f;
-	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
-		glfwSetWindowShouldClose(window, true);
-	}
+	float cameraSpeed = 0.05f;
+
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-		spaceshipPos += spaceshipDir * moveSpeed;
+		cameraPos += cameraSpeed * cameraFront;
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-		spaceshipPos -= spaceshipDir * moveSpeed;
-	if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS)
-		spaceshipPos += spaceshipSide * moveSpeed;
-	if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS)
-		spaceshipPos -= spaceshipSide * moveSpeed;
-	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
-		spaceshipPos += spaceshipUp * moveSpeed;
-	if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
-		spaceshipPos -= spaceshipUp * moveSpeed;
+		cameraPos -= cameraSpeed * cameraFront;
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		spaceshipDir = glm::normalize(glm::vec3(glm::eulerAngleY(angleSpeed) * glm::vec4(spaceshipDir, 0)));
+		cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-		spaceshipDir = glm::normalize(glm::vec3(glm::eulerAngleY(-angleSpeed) * glm::vec4(spaceshipDir, 0)));
-
-	cameraPos = spaceshipPos - 1.5 * spaceshipDir + glm::vec3(0, 1, 0) * 0.5f;
-	cameraDir = spaceshipDir;
-
-	//cameraDir = glm::normalize(-cameraPos);
-
+		cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+		glfwSetWindowShouldClose(window, true);
 }
+
 
 // funkcja jest glowna petla
 void renderLoop(GLFWwindow* window) {
@@ -324,5 +331,8 @@ void renderLoop(GLFWwindow* window) {
 		glfwPollEvents();
 	}
 }
+
+
+
 
 //}
