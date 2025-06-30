@@ -1,4 +1,4 @@
-#include "glew.h"
+﻿#include "glew.h"
 #include <GLFW/glfw3.h>
 #include "glm.hpp"
 #include "ext.hpp"
@@ -76,8 +76,10 @@ namespace texture {
 	GLuint earthMetal;
 	GLuint earthAO;
 	GLuint earthHeight;
-
-
+	GLuint tower;
+	GLuint towerNormal;
+	GLuint castle;
+	GLuint castleNormal;
 }
 
 GLuint skyboxCubemap;
@@ -93,6 +95,9 @@ Core::Shader_Loader shaderLoader;
 
 Core::RenderContext sphereContext;
 Core::RenderContext europeContext;
+
+Core::RenderContext towerContext;
+Core::RenderContext castleContext;
 
 
 glm::vec3 cameraPos = glm::vec3(0.f, 1.f, 5.f);
@@ -169,10 +174,11 @@ void drawObjectTexture(Core::RenderContext& context, glm::mat4 modelMatrix, GLui
 	glUniform3f(glGetUniformLocation(prog, "cameraPos"), cameraPos.x, cameraPos.y, cameraPos.z);
 
 
-
 	Core::SetActiveTexture(textureID, "colorTexture", prog, 0);
 	Core::SetActiveTexture(textureID2, "normalMap", prog, 1);
 
+	glUniform1f(glGetUniformLocation(prog, "metallic"), metallic);
+	glUniform1f(glGetUniformLocation(prog, "roughness"), roughness);
 
 	Core::DrawContext(context);
 	glUseProgram(0);
@@ -220,6 +226,31 @@ void renderScene(GLFWwindow* window)
 		metallic
 	);
 
+	glm::mat4 towerModel =
+		glm::translate(glm::vec3(0.0f, -0.1f, 0.0f)) *
+		glm::scale(glm::vec3(0.003f));
+
+	drawObjectTexture(
+		towerContext,
+		towerModel,
+		texture::tower,
+		texture::towerNormal,
+		1.0f,
+		0.0f
+	);
+
+	glm::mat4 castleModel =
+		glm::translate(glm::vec3(1.7f, 0.1f, 0.0f)) * // przesunięcie zamku
+		glm::scale(glm::vec3(0.003f)); // skalowanie
+
+	drawObjectTexture(
+		castleContext,
+		castleModel,
+		texture::castle,
+		texture::castleNormal,
+		1.0f,
+		0.0f
+	);
 
 
 	glUseProgram(0);
@@ -254,7 +285,7 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 	}
 
 	float xoffset = xpos - lastX;
-	float yoffset = lastY - ypos; // odwrotnie, bo g�ra to mniejsze Y
+	float yoffset = lastY - ypos; // odwrotnie, bo góra to mniejsze Y
 
 	lastX = xpos;
 	lastY = ypos;
@@ -265,7 +296,7 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 	yaw += xoffset;
 	pitch += yoffset;
 
-	// ograniczenie k�ta pitch
+	// ograniczenie kąta pitch
 	if (pitch > 89.0f)
 		pitch = 89.0f;
 	if (pitch < -89.0f)
@@ -286,8 +317,13 @@ void init(GLFWwindow* window)
 	program = shaderLoader.CreateProgram("shaders/shader_5_1.vert", "shaders/shader_5_1.frag");
 	programTex = shaderLoader.CreateProgram("shaders/shader_5_1_tex.vert", "shaders/shader_5_1_tex.frag");
 	loadModelToContext("./models/eurobj.obj", europeContext);
+	loadModelToContext("./models/tower.obj", towerContext);
+	texture::tower = Core::LoadTexture("textures/tower.png");
+	texture::towerNormal = Core::LoadTexture("textures/towerNormal.png");
 
-
+	loadModelToContext("./models/castle.obj", castleContext);
+	texture::castle = Core::LoadTexture("textures/castle.png");
+	texture::castleNormal = Core::LoadTexture("textures/castleNormal.png");
 
 
 	texture::europe = Core::LoadTexture("textures/europe.png");
@@ -379,10 +415,3 @@ void renderLoop(GLFWwindow* window) {
 		glfwPollEvents();
 	}
 }
-
-
-
-
-
-
-//}

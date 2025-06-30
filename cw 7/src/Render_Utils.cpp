@@ -22,7 +22,8 @@ void Core::RenderContext::initFromAssimpMesh(aiMesh* mesh) {
     {
         if (mesh->mTextureCoords[0] != nullptr) {
             textureCoord.push_back(mesh->mTextureCoords[0][i].x);
-            textureCoord.push_back(mesh->mTextureCoords[0][i].y);
+            textureCoord.push_back(1.0f - mesh->mTextureCoords[0][i].y);
+
         }
         else {
             textureCoord.push_back(0.0f);
@@ -86,43 +87,43 @@ void Core::RenderContext::initFromAssimpMesh(aiMesh* mesh) {
 
 }
 
-void Core::DrawVertexArray(const float * vertexArray, int numVertices, int elementSize )
+void Core::DrawVertexArray(const float* vertexArray, int numVertices, int elementSize)
 {
-	glVertexAttribPointer(0, elementSize, GL_FLOAT, false, 0, vertexArray);
-	glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, elementSize, GL_FLOAT, false, 0, vertexArray);
+    glEnableVertexAttribArray(0);
 
-	glDrawArrays(GL_TRIANGLES, 0, numVertices);
+    glDrawArrays(GL_TRIANGLES, 0, numVertices);
 }
 
-void Core::DrawVertexArrayIndexed( const float * vertexArray, const int * indexArray, int numIndexes, int elementSize )
+void Core::DrawVertexArrayIndexed(const float* vertexArray, const int* indexArray, int numIndexes, int elementSize)
 {
-	glVertexAttribPointer(0, elementSize, GL_FLOAT, false, 0, vertexArray);
-	glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, elementSize, GL_FLOAT, false, 0, vertexArray);
+    glEnableVertexAttribArray(0);
 
-	glDrawElements(GL_TRIANGLES, numIndexes, GL_UNSIGNED_INT, indexArray);
+    glDrawElements(GL_TRIANGLES, numIndexes, GL_UNSIGNED_INT, indexArray);
 }
 
 
-void Core::DrawVertexArray( const VertexData & data )
+void Core::DrawVertexArray(const VertexData& data)
 {
-	int numAttribs = std::min(VertexData::MAX_ATTRIBS, data.NumActiveAttribs);
-	for(int i = 0; i < numAttribs; i++)
-	{
-		glVertexAttribPointer(i, data.Attribs[i].Size, GL_FLOAT, false, 0, data.Attribs[i].Pointer);
-		glEnableVertexAttribArray(i);
-	}
-	glDrawArrays(GL_TRIANGLES, 0, data.NumVertices);
+    int numAttribs = std::min(VertexData::MAX_ATTRIBS, data.NumActiveAttribs);
+    for (int i = 0; i < numAttribs; i++)
+    {
+        glVertexAttribPointer(i, data.Attribs[i].Size, GL_FLOAT, false, 0, data.Attribs[i].Pointer);
+        glEnableVertexAttribArray(i);
+    }
+    glDrawArrays(GL_TRIANGLES, 0, data.NumVertices);
 }
 
 void Core::DrawContext(Core::RenderContext& context)
 {
 
-	glBindVertexArray(context.vertexArray);
-	glDrawElements(
-		GL_TRIANGLES,      // mode
-		context.size,    // count
-		GL_UNSIGNED_INT,   // type
-		(void*)0           // element array buffer offset
-	);
-	glBindVertexArray(0);
+    glBindVertexArray(context.vertexArray);
+    glDrawElements(
+        GL_TRIANGLES,      // mode
+        context.size,    // count
+        GL_UNSIGNED_INT,   // type
+        (void*)0           // element array buffer offset
+    );
+    glBindVertexArray(0);
 }
