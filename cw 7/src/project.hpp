@@ -77,9 +77,12 @@ namespace texture {
 	GLuint earthAO;
 	GLuint earthHeight;
 	GLuint tower;
+	GLuint flatNormal;
 	GLuint towerNormal;
 	GLuint castle;
 	GLuint castleNormal;
+
+
 }
 
 GLuint skyboxCubemap;
@@ -94,9 +97,9 @@ GLuint programProcTex;
 Core::Shader_Loader shaderLoader;
 
 Core::RenderContext sphereContext;
+Core::RenderContext towerContext;
 Core::RenderContext europeContext;
 
-Core::RenderContext towerContext;
 Core::RenderContext castleContext;
 
 
@@ -213,7 +216,6 @@ void renderScene(GLFWwindow* window)
 	float time = glfwGetTime();
 
 	drawSkybox();
-
 	glm::mat4 europeModel =
 		glm::translate(europeStartPos) *
 		glm::scale(glm::vec3(2.0f) * 1.10f);
@@ -225,11 +227,20 @@ void renderScene(GLFWwindow* window)
 		roughness,
 		metallic
 	);
-
 	glm::mat4 towerModel =
 		glm::translate(glm::vec3(0.0f, -0.1f, 0.0f)) *
 		glm::scale(glm::vec3(0.003f));
 
+	drawObjectTexture(
+		towerContext,
+		towerModel,
+		texture::tower,
+		texture::flatNormal,
+		roughness,
+		metallic
+	);
+
+	
 	drawObjectTexture(
 		towerContext,
 		towerModel,
@@ -240,7 +251,7 @@ void renderScene(GLFWwindow* window)
 	);
 
 	glm::mat4 castleModel =
-		glm::translate(glm::vec3(1.7f, 0.1f, 0.0f)) * // przesunięcie zamku
+		glm::translate(glm::vec3(1.7f, 0.1f, 0.0f)) * // przesuni�cie zamku
 		glm::scale(glm::vec3(0.003f)); // skalowanie
 
 	drawObjectTexture(
@@ -260,6 +271,54 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
 	aspectRatio = width / float(height);
 	glViewport(0, 0, width, height);
+}
+void loadModelToContextglb(std::string path, Core::RenderContext& context, GLuint& textureID, GLuint& normalMapID)
+{
+	Assimp::Importer import;
+	const aiScene * scene = import.ReadFile(path, aiProcess_Triangulate | aiProcess_CalcTangentSpace | aiProcess_GenSmoothNormals);
+
+	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
+	{
+		std::cout << "ERROR::ASSIMP::" << import.GetErrorString() << std::endl;
+		return;
+	}
+
+	// Load mesh into RenderContext
+	context.initFromAssimpMesh(scene->mMeshes[0]);
+
+	// Extract diffuse + normal map
+	if (scene->HasMaterials())
+	{
+		aiMaterial* material = scene->mMaterials[scene->mMeshes[0]->mMaterialIndex];
+		aiString texPath;
+		if (texPath.C_Str()[0] == '*') {
+			std::cout << "Texture is embedded. Need special handling." << std::endl;
+			// You must manually extract the embedded texture and upload it to OpenGL
+		}
+
+		// Diffuse / Albedo texture
+		if (material->GetTexture(aiTextureType_DIFFUSE, 0, &texPath) == AI_SUCCESS)
+		{
+			std::string fullPath = "models/" + std::string(texPath.C_Str());
+			textureID = Core::LoadTexture(fullPath.c_str());
+			std::cout << "Loaded diffuse: " << fullPath << std::endl;
+		}
+
+		// Normal map texture
+		if (material->GetTexture(aiTextureType_NORMALS, 0, &texPath) == AI_SUCCESS)
+		{
+			std::string fullPath = "models/" + std::string(texPath.C_Str());
+			normalMapID = Core::LoadTexture(fullPath.c_str());
+			std::cout << "Loaded normal map: " << fullPath << std::endl;
+		}
+		else if (material->GetTexture(aiTextureType_HEIGHT, 0, &texPath) == AI_SUCCESS)
+		{
+			// Some exports use HEIGHT for normal map
+			std::string fullPath = "models/" + std::string(texPath.C_Str());
+			normalMapID = Core::LoadTexture(fullPath.c_str());
+			std::cout << "Loaded height/normal: " << fullPath << std::endl;
+		}
+	}
 }
 void loadModelToContext(std::string path, Core::RenderContext& context)
 {
@@ -285,7 +344,7 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 	}
 
 	float xoffset = xpos - lastX;
-	float yoffset = lastY - ypos; // odwrotnie, bo góra to mniejsze Y
+	float yoffset = lastY - ypos; // odwrotnie, bo g�ra to mniejsze Y
 
 	lastX = xpos;
 	lastY = ypos;
@@ -296,7 +355,7 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 	yaw += xoffset;
 	pitch += yoffset;
 
-	// ograniczenie kąta pitch
+	// ograniczenie k�ta pitch
 	if (pitch > 89.0f)
 		pitch = 89.0f;
 	if (pitch < -89.0f)
@@ -317,9 +376,8 @@ void init(GLFWwindow* window)
 	program = shaderLoader.CreateProgram("shaders/shader_5_1.vert", "shaders/shader_5_1.frag");
 	programTex = shaderLoader.CreateProgram("shaders/shader_5_1_tex.vert", "shaders/shader_5_1_tex.frag");
 	loadModelToContext("./models/eurobj.obj", europeContext);
-	loadModelToContext("./models/tower.obj", towerContext);
-	texture::tower = Core::LoadTexture("textures/tower.png");
-	texture::towerNormal = Core::LoadTexture("textures/towerNormal.png");
+	loadModelToContextglb("./models/tower.glb", towerContext, texture::tower, texture::flatNormal);
+
 
 	loadModelToContext("./models/castle.obj", castleContext);
 	texture::castle = Core::LoadTexture("textures/castle.png");
@@ -328,6 +386,8 @@ void init(GLFWwindow* window)
 
 	texture::europe = Core::LoadTexture("textures/europe.png");
 	texture::europeNormal = Core::LoadTexture("textures/europeNormal.png");
+	texture::tower = Core::LoadTexture("./textures/tower.png");
+	//texture::flatNormal = Core::LoadTexture("textures/flatNormal.png");
 
 	const char* faces[6] = {
 	"textures/skybox/_px.jpg",
