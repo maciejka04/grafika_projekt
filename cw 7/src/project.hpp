@@ -89,6 +89,8 @@ namespace texture {
 	GLuint parthenonNormal;
 	GLuint watykan;
 	GLuint watykanNormal;
+	GLuint piza;
+	GLuint wiezowiec;
 
 }
 
@@ -113,6 +115,8 @@ Core::RenderContext katedraContext;
 Core::RenderContext bigbenContext;
 Core::RenderContext parthenonContext;
 Core::RenderContext watykanContext;
+Core::RenderContext pizaContext;
+Core::RenderContext wiezowiecContext;
 
 
 glm::vec3 cameraPos = glm::vec3(0.f, 1.f, 5.f);
@@ -255,8 +259,8 @@ void renderScene(GLFWwindow* window)
 	);
 
 	glm::mat4 castleModel =
-		glm::translate(glm::vec3(1.7f, 0.1f, 0.0f)) * // przesunięcie zamku
-		glm::scale(glm::vec3(0.003f)); // skalowanie
+		glm::translate(glm::vec3(1.7f, 0.1f, 0.0f)) * 
+		glm::scale(glm::vec3(0.003f)); 
 
 	drawObjectTexture(
 		castleContext,
@@ -320,7 +324,31 @@ void renderScene(GLFWwindow* window)
 		1.0f,  // roughness
 		0.0f   // metallic
 	);
+	glm::mat4 pizaModel =
+		glm::translate(glm::vec3(0.0f, 0.0f, 1.0f)) *
+		glm::scale(glm::vec3(0.2f));
+	drawObjectTexture(
+		pizaContext,
+		pizaModel,
+		texture::piza,
+		texture::piza,   // brak normal map, więc dajemy tę samą teksturę lub możesz dodać 0
+		1.0f,
+		0.0f
+	);
 
+	
+
+	glm::mat4 wiezowiecModel =
+		glm::translate(glm::vec3(0.0f, 0.0f, 1.0f)) *
+		glm::scale(glm::vec3(0.03f));
+	drawObjectTexture(
+		wiezowiecContext,
+		wiezowiecModel,
+		texture::wiezowiec,
+		texture::wiezowiec,
+		1.0f,
+		0.0f
+	);
 
 
 	glUseProgram(0);
@@ -416,6 +444,12 @@ void init(GLFWwindow* window)
 	texture::watykan = Core::LoadTexture("textures/watykan.jpeg");
 	texture::watykanNormal = texture::watykan; 
 
+	loadModelToContext("./models/piza.obj", pizaContext);
+	texture::piza = Core::LoadTexture("textures/piza.jpeg");
+
+
+	loadModelToContext("./models/wiezowiec.obj", wiezowiecContext);
+	texture::wiezowiec = Core::LoadTexture("textures/wiezowiec.png");
 
 	const char* faces[6] = {
 	"textures/skybox/_px.jpg",

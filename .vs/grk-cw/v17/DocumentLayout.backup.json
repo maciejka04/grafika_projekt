@@ -58,9 +58,9 @@
               "Title": "project.hpp",
               "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\grafika_projekt\\cw 7\\src\\project.hpp",
               "RelativeDocumentMoniker": "cw 7\\src\\project.hpp",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\grafika_projekt\\cw 7\\src\\project.hpp*",
-              "RelativeToolTip": "cw 7\\src\\project.hpp*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAaAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\grafika_projekt\\cw 7\\src\\project.hpp",
+              "RelativeToolTip": "cw 7\\src\\project.hpp",
+              "ViewState": "AgIAAGwAAAAAAAAAAAAAAHUAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-06-28T09:23:25.491Z",
               "IsPinned": true,
@@ -76,8 +76,7 @@
               "RelativeToolTip": "cw 7\\shader_5_1_tex.vert",
               "ViewState": "AgIAABAAAAAAAAAAAAAkwBYAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-07-01T08:47:20.934Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-01T08:47:20.934Z"
             },
             {
               "$type": "Document",
@@ -125,8 +124,7 @@
               "RelativeToolTip": "cw 7\\shaders\\shader_5_1_tex.frag",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-06-28T09:58:33.919Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-28T09:58:33.919Z"
             },
             {
               "$type": "Document",

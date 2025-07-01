@@ -4,28 +4,28 @@ C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(1
       C:\Users\Admin\Desktop\grafika_projekt\dependencies\glfw-3.3.8.bin.WIN32\include\GLFW\glfw3.h(123,11):
       zobacz poprzednią definicję „APIENTRY”
   
-C:\Users\Admin\Desktop\grafika_projekt\cw 7\src\project.hpp(152,10): warning C4305: "inicjowanie": obcięcie z "double" do "float"
+C:\Users\Admin\Desktop\grafika_projekt\cw 7\src\project.hpp(156,10): warning C4305: "inicjowanie": obcięcie z "double" do "float"
   (kompilowanie pliku źródłowego „src/main.cpp”)
   
-C:\Users\Admin\Desktop\grafika_projekt\cw 7\src\project.hpp(228,13): warning C4244: "inicjowanie": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\Admin\Desktop\grafika_projekt\cw 7\src\project.hpp(232,13): warning C4244: "inicjowanie": konwersja z "double" do "float", możliwa utrata danych
   (kompilowanie pliku źródłowego „src/main.cpp”)
   
-C:\Users\Admin\Desktop\grafika_projekt\cw 7\src\project.hpp(352,11): warning C4244: "=": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\Admin\Desktop\grafika_projekt\cw 7\src\project.hpp(380,11): warning C4244: "=": konwersja z "double" do "float", możliwa utrata danych
   (kompilowanie pliku źródłowego „src/main.cpp”)
   
-C:\Users\Admin\Desktop\grafika_projekt\cw 7\src\project.hpp(353,11): warning C4244: "=": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\Admin\Desktop\grafika_projekt\cw 7\src\project.hpp(381,11): warning C4244: "=": konwersja z "double" do "float", możliwa utrata danych
   (kompilowanie pliku źródłowego „src/main.cpp”)
   
-C:\Users\Admin\Desktop\grafika_projekt\cw 7\src\project.hpp(357,16): warning C4244: "inicjowanie": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\Admin\Desktop\grafika_projekt\cw 7\src\project.hpp(385,16): warning C4244: "inicjowanie": konwersja z "double" do "float", możliwa utrata danych
   (kompilowanie pliku źródłowego „src/main.cpp”)
   
-C:\Users\Admin\Desktop\grafika_projekt\cw 7\src\project.hpp(358,16): warning C4244: "inicjowanie": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\Admin\Desktop\grafika_projekt\cw 7\src\project.hpp(386,16): warning C4244: "inicjowanie": konwersja z "double" do "float", możliwa utrata danych
   (kompilowanie pliku źródłowego „src/main.cpp”)
   
-C:\Users\Admin\Desktop\grafika_projekt\cw 7\src\project.hpp(360,10): warning C4244: "=": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\Admin\Desktop\grafika_projekt\cw 7\src\project.hpp(388,10): warning C4244: "=": konwersja z "double" do "float", możliwa utrata danych
   (kompilowanie pliku źródłowego „src/main.cpp”)
   
-C:\Users\Admin\Desktop\grafika_projekt\cw 7\src\project.hpp(361,10): warning C4244: "=": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\Admin\Desktop\grafika_projekt\cw 7\src\project.hpp(389,10): warning C4244: "=": konwersja z "double" do "float", możliwa utrata danych
   (kompilowanie pliku źródłowego „src/main.cpp”)
   
 imgui_impl_glfw.obj : warning LNK4075: zignorowano opcję „/EDITANDCONTINUE” z powodu określenia opcji „/INCREMENTAL:NO”
