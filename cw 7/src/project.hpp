@@ -246,8 +246,8 @@ void renderScene(GLFWwindow* window)
 	);
 
 	glm::mat4 towerModel =
-		glm::translate(glm::vec3(0.0f, -0.1f, 0.0f)) *
-		glm::scale(glm::vec3(0.003f));
+		glm::translate(glm::vec3(-0.5f, -0.105f, -0.2f)) *//zachód, dół, północ
+		glm::scale(glm::vec3(0.0009f));
 
 	drawObjectTexture(
 		towerContext,
@@ -259,8 +259,8 @@ void renderScene(GLFWwindow* window)
 	);
 
 	glm::mat4 castleModel =
-		glm::translate(glm::vec3(1.7f, 0.1f, 0.0f)) * 
-		glm::scale(glm::vec3(0.003f)); 
+		glm::translate(glm::vec3(-1.6f, -0.005f, 1.55f)) * //zachód, dół, południe
+		glm::scale(glm::vec3(0.0006f)); // skalowanie
 
 	drawObjectTexture(
 		castleContext,
@@ -272,9 +272,9 @@ void renderScene(GLFWwindow* window)
 	);
 
 	glm::mat4 katedraModel =
-		glm::translate(glm::vec3(-1.7f, 0.0f, 0.0f)) *
-		glm::rotate(glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f)) * // możesz ustawić własne przesunięcie
-		glm::scale(glm::vec3(0.0004f));                   // skalowanie podobne do zamku
+		glm::translate(glm::vec3(-0.8f, -0.05f, 0.0f)) * //zachód, dół, północ
+		glm::rotate(glm::radians(-90.0f), glm::vec3(0.6f, 0.0f, 0.0f)) * // możesz ustawić własne przesunięcie
+		glm::scale(glm::vec3(0.00007f));                   // skalowanie podobne do zamku
 
 	drawObjectTexture(
 		katedraContext,
@@ -286,9 +286,9 @@ void renderScene(GLFWwindow* window)
 	);
 
 	glm::mat4 bigbenModel =
-		glm::translate(glm::vec3(1.0f, 0.0f, 0.0f)) * // możesz zmienić pozycję, tu jest przesunięcie // rotacja jak katedra
+		glm::translate(glm::vec3(-1.3f, -0.03f, -0.7f)) * //zachód, dół, północ
 		glm::rotate(glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f)) * // nowa rotacja o 90 stopni wokół Y
-		glm::scale(glm::vec3(0.3f)); // skalowanie podobne do katedry
+		glm::scale(glm::vec3(0.03f)); // skalowanie podobne do katedry
 
 	drawObjectTexture(
 		bigbenContext,
@@ -313,8 +313,8 @@ void renderScene(GLFWwindow* window)
 	
 
 	glm::mat4 watykanModel =
-		glm::translate(glm::vec3(0.5f, 0.0f, -1.0f)) *  // przykład pozycji, możesz zmienić
-		glm::scale(glm::vec3(0.1f));                    // przykład skali, dopasuj do modelu
+		glm::translate(glm::vec3(0.46f, -0.11f, 1.0f)) *  //wschod, dół, południe
+		glm::scale(glm::vec3(0.01f));                    // przykład skali, dopasuj do modelu
 
 	drawObjectTexture(
 		watykanContext,
@@ -324,9 +324,10 @@ void renderScene(GLFWwindow* window)
 		1.0f,  // roughness
 		0.0f   // metallic
 	);
+
 	glm::mat4 pizaModel =
-		glm::translate(glm::vec3(0.0f, 0.0f, 1.0f)) *
-		glm::scale(glm::vec3(0.2f));
+		glm::translate(glm::vec3(0.10f, 0.045f, 0.6f)) *//wschod, gora, południe
+		glm::scale(glm::vec3(0.015f));
 	drawObjectTexture(
 		pizaContext,
 		pizaModel,
