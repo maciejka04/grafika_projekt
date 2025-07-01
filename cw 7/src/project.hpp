@@ -80,6 +80,10 @@ namespace texture {
 	GLuint towerNormal;
 	GLuint castle;
 	GLuint castleNormal;
+	GLuint katedra;
+	GLuint katedraNormal;
+	GLuint bigben;
+	GLuint bigbenNormal;
 }
 
 GLuint skyboxCubemap;
@@ -88,6 +92,7 @@ GLuint skyboxCubemap;
 GLuint program;
 GLuint programSun;
 GLuint programTex;
+
 
 GLuint programEarth;
 GLuint programProcTex;
@@ -98,6 +103,12 @@ Core::RenderContext europeContext;
 
 Core::RenderContext towerContext;
 Core::RenderContext castleContext;
+Core::RenderContext katedraContext;
+Core::RenderContext bigbenContext;
+
+
+
+
 
 
 glm::vec3 cameraPos = glm::vec3(0.f, 1.f, 5.f);
@@ -252,6 +263,37 @@ void renderScene(GLFWwindow* window)
 		0.0f
 	);
 
+	glm::mat4 katedraModel =
+		glm::translate(glm::vec3(-1.7f, 0.0f, 0.0f)) * 
+		glm::rotate(glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f)) * // możesz ustawić własne przesunięcie
+		glm::scale(glm::vec3(0.0004f));                   // skalowanie podobne do zamku
+
+	drawObjectTexture(
+		katedraContext,
+		katedraModel,
+		texture::katedra,
+		texture::katedra,
+		1.0f,   // roughness, możesz zmienić
+		0.0f    // metallic, możesz zmienić
+	);
+
+	glm::mat4 bigbenModel =
+		glm::translate(glm::vec3(1.0f, 0.0f, 0.0f)) * // możesz zmienić pozycję, tu jest przesunięcie // rotacja jak katedra
+		glm::rotate(glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f)) * // nowa rotacja o 90 stopni wokół Y
+		glm::scale(glm::vec3(0.3f)); // skalowanie podobne do katedry
+
+	drawObjectTexture(
+		bigbenContext,
+		bigbenModel,
+		texture::bigben,
+		texture::bigben,
+		1.0f,   // roughness, możesz zmienić
+		0.0f    // metallic, możesz zmienić
+	);
+
+	
+
+	
 
 	glUseProgram(0);
 	//glfwSwapBuffers(window);
@@ -329,6 +371,16 @@ void init(GLFWwindow* window)
 	texture::europe = Core::LoadTexture("textures/europe.png");
 	texture::europeNormal = Core::LoadTexture("textures/europeNormal.png");
 
+	loadModelToContext("./models/katedra.obj", katedraContext);
+	texture::katedra = Core::LoadTexture("textures/katedra.jpeg");
+	texture::katedraNormal = texture::katedra;
+
+	loadModelToContext("./models/bigben.obj", bigbenContext);
+	texture::bigben = Core::LoadTexture("textures/bigben.jpeg");
+	// nie ładujesz normal mapy, więc nie przypisujesz texture::bigbenNormal
+	texture::bigbenNormal = texture::bigben;
+
+
 	const char* faces[6] = {
 	"textures/skybox/_px.jpg",
 	"textures/skybox/_nx.jpg",
@@ -338,6 +390,7 @@ void init(GLFWwindow* window)
 	"textures/skybox/_nz.jpg"
 	};
 
+	
 	glGenVertexArrays(1, &skyboxVAO);
 	glGenBuffers(1, &skyboxVBO);
 
@@ -415,3 +468,4 @@ void renderLoop(GLFWwindow* window) {
 		glfwPollEvents();
 	}
 }
+

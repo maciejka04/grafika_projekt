@@ -15,6 +15,8 @@ void Core::RenderContext::initFromAssimpMesh(aiMesh* mesh) {
     vertexBuffer = 0;
     vertexIndexBuffer = 0;
 
+    
+
     std::vector<float> textureCoord;
     std::vector<unsigned int> indices;
     //tex coord must be converted to 2d vecs

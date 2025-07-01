@@ -121,9 +121,6 @@
     <None Include="shaders\shader_5_1.vert">
       <Filter>Shader Files</Filter>
     </None>
-    <None Include="shaders\shader_5_1_tex.vert">
-      <Filter>Shader Files</Filter>
-    </None>
     <None Include="shaders\shader_5_1_tex.frag">
       <Filter>Shader Files</Filter>
     </None>
@@ -133,10 +130,7 @@
     <None Include="shaders\shader_5_1_ship.vert">
       <Filter>Shader Files</Filter>
     </None>
-    <None Include="shader_malbork.vert">
-      <Filter>Shader Files</Filter>
-    </None>
-    <None Include="shader_malbork.frag">
+    <None Include="shader_5_1_tex.vert">
       <Filter>Shader Files</Filter>
     </None>
   </ItemGroup>

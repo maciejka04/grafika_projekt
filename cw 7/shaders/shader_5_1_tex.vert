@@ -19,7 +19,7 @@ void main()
     vec3 worldPosition = vec3(modelMatrix * vec4(vertexPosition, 1.0));
     worldPos = worldPosition;
 
-    // Transformacja wektorów bez skalowania
+    // Transformacja wektorÃ³w bez skalowania
     mat3 normalMatrix = transpose(inverse(mat3(modelMatrix)));
 
     vec3 T = normalize(normalMatrix * vertexTangent);
