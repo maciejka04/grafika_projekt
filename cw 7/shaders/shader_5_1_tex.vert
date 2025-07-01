@@ -9,9 +9,11 @@ layout(location = 4) in vec3 vertexBitangent;
 uniform mat4 transformation;  // MVP / VP * M
 uniform mat4 modelMatrix;
 
+out vec3 vecNormal;
 out vec3 worldPos;
+out vec3 worldNormal;
 out vec2 texCoord;
-out mat3 TBN;
+out mat3 TBN; // Tangent-Bitangent-Normal matrix to fragment shader
 
 void main()
 {

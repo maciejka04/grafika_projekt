@@ -84,6 +84,12 @@ namespace texture {
 	GLuint katedraNormal;
 	GLuint bigben;
 	GLuint bigbenNormal;
+	GLuint koloseum;
+	GLuint parthenon;
+	GLuint parthenonNormal;
+	GLuint watykan;
+	GLuint watykanNormal;
+
 }
 
 GLuint skyboxCubemap;
@@ -105,10 +111,8 @@ Core::RenderContext towerContext;
 Core::RenderContext castleContext;
 Core::RenderContext katedraContext;
 Core::RenderContext bigbenContext;
-
-
-
-
+Core::RenderContext parthenonContext;
+Core::RenderContext watykanContext;
 
 
 glm::vec3 cameraPos = glm::vec3(0.f, 1.f, 5.f);
@@ -264,7 +268,7 @@ void renderScene(GLFWwindow* window)
 	);
 
 	glm::mat4 katedraModel =
-		glm::translate(glm::vec3(-1.7f, 0.0f, 0.0f)) * 
+		glm::translate(glm::vec3(-1.7f, 0.0f, 0.0f)) *
 		glm::rotate(glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f)) * // możesz ustawić własne przesunięcie
 		glm::scale(glm::vec3(0.0004f));                   // skalowanie podobne do zamku
 
@@ -293,7 +297,31 @@ void renderScene(GLFWwindow* window)
 
 	
 
+	glm::mat4 parthenonModel =
+		glm::translate(glm::vec3(0.0f, 0.0f, 0.5f)) *
+		glm::scale(glm::vec3(0.1f));  // dopasuj skalę do modelu
+
+	drawObjectColor(
+		parthenonContext,
+		parthenonModel,
+		glm::vec3(1.0f, 1.0f, 1.0f)
+	);
 	
+
+	glm::mat4 watykanModel =
+		glm::translate(glm::vec3(0.5f, 0.0f, -1.0f)) *  // przykład pozycji, możesz zmienić
+		glm::scale(glm::vec3(0.1f));                    // przykład skali, dopasuj do modelu
+
+	drawObjectTexture(
+		watykanContext,
+		watykanModel,
+		texture::watykan,
+		texture::watykanNormal,
+		1.0f,  // roughness
+		0.0f   // metallic
+	);
+
+
 
 	glUseProgram(0);
 	//glfwSwapBuffers(window);
@@ -377,8 +405,16 @@ void init(GLFWwindow* window)
 
 	loadModelToContext("./models/bigben.obj", bigbenContext);
 	texture::bigben = Core::LoadTexture("textures/bigben.jpeg");
-	// nie ładujesz normal mapy, więc nie przypisujesz texture::bigbenNormal
 	texture::bigbenNormal = texture::bigben;
+
+
+	loadModelToContext("./models/parthenon.obj", parthenonContext);
+	texture::parthenon = Core::LoadTexture("textures/parthenon.png");
+	texture::parthenonNormal = texture::parthenon; 
+
+	loadModelToContext("./models/watykan.obj", watykanContext);
+	texture::watykan = Core::LoadTexture("textures/watykan.jpeg");
+	texture::watykanNormal = texture::watykan; 
 
 
 	const char* faces[6] = {
@@ -390,7 +426,7 @@ void init(GLFWwindow* window)
 	"textures/skybox/_nz.jpg"
 	};
 
-	
+
 	glGenVertexArrays(1, &skyboxVAO);
 	glGenBuffers(1, &skyboxVBO);
 
@@ -468,4 +504,3 @@ void renderLoop(GLFWwindow* window) {
 		glfwPollEvents();
 	}
 }
-

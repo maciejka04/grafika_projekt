@@ -6,6 +6,9 @@ uniform sampler2D normalMap;
 uniform vec3 lightPos;
 uniform vec3 cameraPos;
 
+float AMBIENT = 0.3;
+float shininess = 32.0; // standard Phong shininess
+
 in vec3 worldPos;
 in vec2 texCoord;
 in mat3 TBN;
@@ -25,6 +28,7 @@ void main()
 
     vec3 albedo = texture(colorTexture, texCoord).rgb;
 
+    // Oswietlenie
     float diff = max(dot(normal, lightDir), 0.0);
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), 16.0); // uproszczone shininess
 

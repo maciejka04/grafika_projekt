@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Admin\\Desktop\\grafika_projekt\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F2FC2E8F-CBA6-49D7-8B73-4BFBCB64D310}|cw 7\\grk-cw7.vcxproj|C:\\Users\\Admin\\Desktop\\grafika_projekt\\cw 7\\shader_5_1_tex.vert||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{F2FC2E8F-CBA6-49D7-8B73-4BFBCB64D310}|cw 7\\grk-cw7.vcxproj|solutionrelative:cw 7\\shader_5_1_tex.vert||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F2FC2E8F-CBA6-49D7-8B73-4BFBCB64D310}|cw 7\\grk-cw7.vcxproj|C:\\Users\\Admin\\Desktop\\grafika_projekt\\cw 7\\src\\project.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{F2FC2E8F-CBA6-49D7-8B73-4BFBCB64D310}|cw 7\\grk-cw7.vcxproj|solutionrelative:cw 7\\src\\project.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F2FC2E8F-CBA6-49D7-8B73-4BFBCB64D310}|cw 7\\grk-cw7.vcxproj|C:\\Users\\Admin\\Desktop\\grafika_projekt\\cw 7\\shaders\\shader_5_1_tex.frag||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{F2FC2E8F-CBA6-49D7-8B73-4BFBCB64D310}|cw 7\\grk-cw7.vcxproj|solutionrelative:cw 7\\shaders\\shader_5_1_tex.frag||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2FC2E8F-CBA6-49D7-8B73-4BFBCB64D310}|cw 7\\grk-cw7.vcxproj|C:\\Users\\Admin\\Desktop\\grafika_projekt\\cw 7\\shader_5_1_tex.vert||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{F2FC2E8F-CBA6-49D7-8B73-4BFBCB64D310}|cw 7\\grk-cw7.vcxproj|solutionrelative:cw 7\\shader_5_1_tex.vert||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F2FC2E8F-CBA6-49D7-8B73-4BFBCB64D310}|cw 7\\grk-cw7.vcxproj|C:\\Users\\Admin\\Desktop\\grafika_projekt\\cw 7\\src\\Render_Utils.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -50,17 +50,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "project.hpp",
               "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\grafika_projekt\\cw 7\\src\\project.hpp",
               "RelativeDocumentMoniker": "cw 7\\src\\project.hpp",
               "ToolTip": "C:\\Users\\Admin\\Desktop\\grafika_projekt\\cw 7\\src\\project.hpp",
               "RelativeToolTip": "cw 7\\src\\project.hpp",
-              "ViewState": "AgIAAMgBAAAAAAAAAAAqwM8BAAASAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-06-28T09:23:25.491Z",
               "IsPinned": true,
@@ -68,13 +68,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "shader_5_1_tex.vert",
               "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\grafika_projekt\\cw 7\\shader_5_1_tex.vert",
               "RelativeDocumentMoniker": "cw 7\\shader_5_1_tex.vert",
               "ToolTip": "C:\\Users\\Admin\\Desktop\\grafika_projekt\\cw 7\\shader_5_1_tex.vert",
               "RelativeToolTip": "cw 7\\shader_5_1_tex.vert",
-              "ViewState": "AgIAABAAAAAAAAAAAAAkwBQAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABAAAAAAAAAAAAAkwBYAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2025-07-01T08:47:20.934Z",
               "EditorCaption": ""
@@ -89,8 +89,7 @@
               "RelativeToolTip": "cw 7\\src\\Render_Utils.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-07-01T06:50:49.852Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-01T06:50:49.852Z"
             },
             {
               "$type": "Document",
@@ -102,8 +101,7 @@
               "RelativeToolTip": "cw 7\\src\\Render_Utils.cpp",
               "ViewState": "AgIAAAwAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-06-30T15:55:10.023Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-30T15:55:10.023Z"
             },
             {
               "$type": "Document",
@@ -119,13 +117,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "shader_5_1_tex.frag",
               "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\grafika_projekt\\cw 7\\shaders\\shader_5_1_tex.frag",
               "RelativeDocumentMoniker": "cw 7\\shaders\\shader_5_1_tex.frag",
               "ToolTip": "C:\\Users\\Admin\\Desktop\\grafika_projekt\\cw 7\\shaders\\shader_5_1_tex.frag",
               "RelativeToolTip": "cw 7\\shaders\\shader_5_1_tex.frag",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2025-06-28T09:58:33.919Z",
               "EditorCaption": ""
