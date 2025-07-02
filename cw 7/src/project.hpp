@@ -85,12 +85,11 @@ namespace texture {
 	GLuint bigben;
 	GLuint bigbenNormal;
 	GLuint koloseum;
-	GLuint parthenon;
-	GLuint parthenonNormal;
 	GLuint watykan;
 	GLuint watykanNormal;
 	GLuint piza;
-	GLuint wiezowiec;
+	GLuint inowroclaw;
+
 
 }
 
@@ -113,10 +112,11 @@ Core::RenderContext towerContext;
 Core::RenderContext castleContext;
 Core::RenderContext katedraContext;
 Core::RenderContext bigbenContext;
-Core::RenderContext parthenonContext;
 Core::RenderContext watykanContext;
 Core::RenderContext pizaContext;
-Core::RenderContext wiezowiecContext;
+Core::RenderContext inowroclawContext;
+
+
 
 
 glm::vec3 cameraPos = glm::vec3(0.f, 1.f, 5.f);
@@ -273,14 +273,13 @@ void renderScene(GLFWwindow* window)
 
 	glm::mat4 katedraModel =
 		glm::translate(glm::vec3(-0.8f, -0.05f, 0.0f)) * //zachód, dół, północ
-		glm::rotate(glm::radians(-90.0f), glm::vec3(0.6f, 0.0f, 0.0f)) * // możesz ustawić własne przesunięcie
-		glm::scale(glm::vec3(0.00007f));                   // skalowanie podobne do zamku
+		glm::scale(glm::vec3(0.02f));                   // skalowanie podobne do zamku
 
 	drawObjectTexture(
 		katedraContext,
 		katedraModel,
 		texture::katedra,
-		texture::katedra,
+		texture::katedraNormal,
 		1.0f,   // roughness, możesz zmienić
 		0.0f    // metallic, możesz zmienić
 	);
@@ -299,18 +298,7 @@ void renderScene(GLFWwindow* window)
 		0.0f    // metallic, możesz zmienić
 	);
 
-	
 
-	glm::mat4 parthenonModel =
-		glm::translate(glm::vec3(0.0f, 0.0f, 0.5f)) *
-		glm::scale(glm::vec3(0.1f));  // dopasuj skalę do modelu
-
-	drawObjectColor(
-		parthenonContext,
-		parthenonModel,
-		glm::vec3(1.0f, 1.0f, 1.0f)
-	);
-	
 
 	glm::mat4 watykanModel =
 		glm::translate(glm::vec3(0.46f, -0.11f, 1.0f)) *  //wschod, dół, południe
@@ -337,16 +325,17 @@ void renderScene(GLFWwindow* window)
 		0.0f
 	);
 
-	
 
-	glm::mat4 wiezowiecModel =
-		glm::translate(glm::vec3(0.0f, 0.0f, 1.0f)) *
-		glm::scale(glm::vec3(0.03f));
+
+	glm::mat4 inowroclawModel =
+		glm::translate(glm::vec3(1.1f, -0.047f, -0.9f)) *//wschod, dół, północ
+		glm::scale(glm::vec3(0.0045f));
+
 	drawObjectTexture(
-		wiezowiecContext,
-		wiezowiecModel,
-		texture::wiezowiec,
-		texture::wiezowiec,
+		inowroclawContext,
+		inowroclawModel,
+		texture::inowroclaw,
+		texture::inowroclaw, // brak normal mapy
 		1.0f,
 		0.0f
 	);
@@ -428,29 +417,28 @@ void init(GLFWwindow* window)
 	texture::europe = Core::LoadTexture("textures/europe.png");
 	texture::europeNormal = Core::LoadTexture("textures/europeNormal.png");
 
-	loadModelToContext("./models/katedra.obj", katedraContext);
+	loadModelToContext("./models/katedra2.obj", katedraContext);
 	texture::katedra = Core::LoadTexture("textures/katedra.jpeg");
-	texture::katedraNormal = texture::katedra;
+	texture::katedraNormal = Core::LoadTexture("textures/katedraNormal2.png");
 
 	loadModelToContext("./models/bigben.obj", bigbenContext);
 	texture::bigben = Core::LoadTexture("textures/bigben.jpeg");
 	texture::bigbenNormal = texture::bigben;
 
 
-	loadModelToContext("./models/parthenon.obj", parthenonContext);
-	texture::parthenon = Core::LoadTexture("textures/parthenon.png");
-	texture::parthenonNormal = texture::parthenon; 
+
 
 	loadModelToContext("./models/watykan.obj", watykanContext);
 	texture::watykan = Core::LoadTexture("textures/watykan.jpeg");
-	texture::watykanNormal = texture::watykan; 
+	texture::watykanNormal = texture::watykan;
 
 	loadModelToContext("./models/piza.obj", pizaContext);
 	texture::piza = Core::LoadTexture("textures/piza.jpeg");
 
 
-	loadModelToContext("./models/wiezowiec.obj", wiezowiecContext);
-	texture::wiezowiec = Core::LoadTexture("textures/wiezowiec.png");
+	loadModelToContext("./models/inowroclaw2.obj", inowroclawContext);
+	texture::inowroclaw = Core::LoadTexture("textures/inowroclaw.jpeg");
+
 
 	const char* faces[6] = {
 	"textures/skybox/_px.jpg",
@@ -495,7 +483,7 @@ void shutdown(GLFWwindow* window)
 //obsluga wejscia
 void processInput(GLFWwindow* window)
 {
-	float cameraSpeed = 0.05f;
+	float cameraSpeed = 0.025f;
 
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 		cameraPos += cameraSpeed * cameraFront;
