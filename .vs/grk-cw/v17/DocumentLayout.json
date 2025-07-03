@@ -48,7 +48,7 @@
               "RelativeDocumentMoniker": "cw 7\\src\\project.hpp",
               "ToolTip": "C:\\Users\\oliwi\\OneDrive\\Desktop\\repozytoria\\grafika_projekt\\cw 7\\src\\project.hpp",
               "RelativeToolTip": "cw 7\\src\\project.hpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAADkAAAAAAAAAAAAAABkAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-07-03T09:45:46.771Z",
               "EditorCaption": ""
@@ -63,8 +63,7 @@
               "RelativeToolTip": "cw 7\\shaders\\shader_5_1_tex.frag",
               "ViewState": "AgIAACEAAAAAAAAAAAAcwEAAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-06-28T09:58:33.919Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-28T09:58:33.919Z"
             },
             {
               "$type": "Document",
@@ -76,8 +75,7 @@
               "RelativeToolTip": "cw 7\\shaders\\shader_5_1_tex.vert",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-07-02T23:39:24.337Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-02T23:39:24.337Z"
             }
           ]
         }
