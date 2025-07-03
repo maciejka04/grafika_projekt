@@ -17,3 +17,4 @@ Wykorzystane techniki grafiki komputerowej:
 - ładowanie modeli przy pomocy Assimp.
 
 ![Działanie programu]("screenshots/image.png")
+<img src="screenshots/image.png" alt="Zrzut ekranu" />
