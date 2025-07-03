@@ -16,4 +16,4 @@ Wykorzystane techniki grafiki komputerowej:
 - Mapowanie cieni, 
 - ładowanie modeli przy pomocy Assimp.
 
-![Działanie programu]("image.png")
+![Działanie programu]("screenshots/image.png")
