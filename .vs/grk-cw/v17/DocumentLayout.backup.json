@@ -17,10 +17,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{F2FC2E8F-CBA6-49D7-8B73-4BFBCB64D310}|cw 7\\grk-cw7.vcxproj|C:\\Users\\oliwi\\OneDrive\\Desktop\\repozytoria\\grafika_projekt\\cw 7\\src\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{F2FC2E8F-CBA6-49D7-8B73-4BFBCB64D310}|cw 7\\grk-cw7.vcxproj|solutionrelative:cw 7\\src\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F2FC2E8F-CBA6-49D7-8B73-4BFBCB64D310}|cw 7\\grk-cw7.vcxproj|C:\\Users\\oliwi\\OneDrive\\Desktop\\repozytoria\\grafika_projekt\\cw 7\\src\\project2.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{F2FC2E8F-CBA6-49D7-8B73-4BFBCB64D310}|cw 7\\grk-cw7.vcxproj|solutionrelative:cw 7\\src\\project2.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -52,7 +48,7 @@
               "RelativeDocumentMoniker": "cw 7\\src\\project.hpp",
               "ToolTip": "C:\\Users\\oliwi\\OneDrive\\Desktop\\repozytoria\\grafika_projekt\\cw 7\\src\\project.hpp",
               "RelativeToolTip": "cw 7\\src\\project.hpp",
-              "ViewState": "AgIAAGwBAAAAAAAAAAAIwHwBAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-07-03T09:45:46.771Z",
               "EditorCaption": ""
@@ -65,9 +61,10 @@
               "RelativeDocumentMoniker": "cw 7\\shaders\\shader_5_1_tex.frag",
               "ToolTip": "C:\\Users\\oliwi\\OneDrive\\Desktop\\repozytoria\\grafika_projekt\\cw 7\\shaders\\shader_5_1_tex.frag",
               "RelativeToolTip": "cw 7\\shaders\\shader_5_1_tex.frag",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACEAAAAAAAAAAAAcwEAAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-06-28T09:58:33.919Z"
+              "WhenOpened": "2025-06-28T09:58:33.919Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -77,21 +74,10 @@
               "RelativeDocumentMoniker": "cw 7\\shaders\\shader_5_1_tex.vert",
               "ToolTip": "C:\\Users\\oliwi\\OneDrive\\Desktop\\repozytoria\\grafika_projekt\\cw 7\\shaders\\shader_5_1_tex.vert",
               "RelativeToolTip": "cw 7\\shaders\\shader_5_1_tex.vert",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-07-02T23:39:24.337Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "project2.hpp",
-              "DocumentMoniker": "C:\\Users\\oliwi\\OneDrive\\Desktop\\repozytoria\\grafika_projekt\\cw 7\\src\\project2.hpp",
-              "RelativeDocumentMoniker": "cw 7\\src\\project2.hpp",
-              "ToolTip": "C:\\Users\\oliwi\\OneDrive\\Desktop\\repozytoria\\grafika_projekt\\cw 7\\src\\project2.hpp",
-              "RelativeToolTip": "cw 7\\src\\project2.hpp",
-              "ViewState": "AgIAACsBAAAAAAAAAAAowEMBAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-07-02T22:36:50.583Z"
+              "WhenOpened": "2025-07-02T23:39:24.337Z",
+              "EditorCaption": ""
             }
           ]
         }
