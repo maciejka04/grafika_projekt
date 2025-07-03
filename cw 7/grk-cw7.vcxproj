@@ -33,6 +33,7 @@
     <ClInclude Include="src\Camera.h" />
     <ClInclude Include="src\project.hpp" />
     <ClInclude Include="src\objload.h" />
+    <ClInclude Include="src\project2.hpp" />
     <ClInclude Include="src\Render_Utils.h" />
     <ClInclude Include="src\Shader_Loader.h" />
     <ClInclude Include="src\SOIL\image_DXT.h" />
@@ -44,12 +45,14 @@
     <ClInclude Include="src\Texture.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="shaders\shader_5_1_tex.vert" />
+    <None Include="shaders\shadow_map.frag" />
+    <None Include="shaders\shadow_map.vert" />
     <None Include="shaders\shader_5_1.frag" />
     <None Include="shaders\shader_5_1.vert" />
     <None Include="shaders\shader_5_1_ship.frag" />
     <None Include="shaders\shader_5_1_ship.vert" />
     <None Include="shaders\shader_5_1_tex.frag" />
-    <None Include="shader_5_1_tex.vert" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F2FC2E8F-CBA6-49D7-8B73-4BFBCB64D310}</ProjectGuid>

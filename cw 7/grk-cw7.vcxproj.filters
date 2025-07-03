@@ -113,6 +113,9 @@
     <ClInclude Include="Nagłówek.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\project2.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\shader_5_1.frag">
@@ -130,7 +133,13 @@
     <None Include="shaders\shader_5_1_ship.vert">
       <Filter>Shader Files</Filter>
     </None>
-    <None Include="shader_5_1_tex.vert">
+    <None Include="shaders\shadow_map.frag">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="shaders\shadow_map.vert">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="shaders\shader_5_1_tex.vert">
       <Filter>Shader Files</Filter>
     </None>
   </ItemGroup>
